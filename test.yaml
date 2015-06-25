@@ -1,0 +1,14 @@
+{
+  "type": "metric alert",
+  "query": "avg(last_1h):sum:system.disk.in_use{aws-production} by {host,device} > 0.9",
+  "name": "Free Disk Space",
+  "message": "Hey, we're running out of disk! @thomasb@aweber.com",
+  "options": {
+    "notify_audit": True,
+    "timeout_h": 0,
+    "silenced": {},
+    "no_data_timeframe": 120,
+    "notify_no_data": True,
+    "renotify_interval": 0
+  }
+}
