@@ -11,6 +11,7 @@ config_path = './'
 
 initialize(**options)
 
+
 # Read some YAML
 def read_yaml(filename):
     fo = open(filename, 'r')
@@ -42,7 +43,12 @@ def create_monitor(item):
     query = item['query']
     message = item['message']
     type = item['type']
-    api.Monitor.create(type=type, query=query, name=name, message=message, options=options)
+    api.Monitor.create(type=type,
+                       query=query,
+                       name=name,
+                       message=message,
+                       options=options
+                       )
 
 
 def get_all_monitors():
@@ -83,7 +89,9 @@ def compare_monitor(monitor1, monitor2):
 
     mon_match = False
 
-    if (monitor1['query'] == monitor2['query']) and (monitor1['type'] == monitor2['type']) and (monitor1['name'] == monitor2['name']):
+    if ((monitor1['query'] == monitor2['query'])
+       and (monitor1['type'] == monitor2['type'])
+       and (monitor1['name'] == monitor2['name'])):
         mon_match = True
 
     if (monitor1 == monitor2):
@@ -146,7 +154,8 @@ def print_all_monitors(cfg_monitors, dd_monitors):
             print 'name:    ', yaml_doc['name'], type(yaml_doc['name'])
             print 'options: ', type(yaml_doc['options'])
             for item in yaml_doc['options']:
-                print '\t', item, ': ', yaml_doc['options'][item], type(yaml_doc['options'][item])
+                print '\t', item, ': ', yaml_doc['options'][item], \
+                    type(yaml_doc['options'][item])
             print '\n'
 
     print 'Here\'s the API output\n---------------\n'
@@ -158,7 +167,8 @@ def print_all_monitors(cfg_monitors, dd_monitors):
         print 'name:    ', monitor['name'], type(monitor['name'])
         print 'options: ', type(monitor['options'])
         for item in monitor['options']:
-            print '\t', item, ': ', monitor['options'][item], type(monitor['options'][item])
+            print '\t', item, ': ', monitor['options'][item], \
+                type(monitor['options'][item])
         print '\n'
 
 
