@@ -1,10 +1,9 @@
-datadog_monitors
-================
+## Datadog Monitors
 
-Monitor definitions for Datadog
+### Overview
+Easily create [Datadog](http://www.datadoghq.com) monitors to monitor application and service health.
 
-http://docs.datadoghq.com/api/#monitor
+Commits to this repository will trigger a [Jenkins job](http://jenkins-docker.svc.csh/job/Datadog%20Monitors) that automatically deploys monitors via the [Datadog API](http://docs.datadoghq.com/api/#monitor).
 
-Modifying the monitor.yaml file will trigger the jenkins job to update datadog monitors via the API.
-
-Monitor.YAML is the authoritative list of DD monitors, anything added via the web interface that does not exist in the YAML file will be removed at the next jenkins job run.
+### Creating new monitors
+The [monitor.yaml](https://github-enterprise.colo.lair/Operations/datadog_monitors/blob/master/monitors.yaml) file located in this repository is the authoritative list of all Datadog monitors. Any monitors added via the web interface that are not present in this file will be deleted by the Jenkins run.
