@@ -21,19 +21,19 @@ options:
   no_data_timeframe: 120
   notify_no_data: True
   renotify_interval: 0
-# ---
-# message: '@thomasb@aweber.com'
-# query: '"datadog.agent.up".over("environment:production").by("service").last(1).pct_by_status()'
-# type: service check
-# name: Host Up
-# options:
-#   notify_audit: False
-#   timeout_h: 0
-#   silenced: {}
-#   notify_no_data: True
-#   renotify_interval: 0
-#   no_data_timeframe: 2
-#   thresholds:
-#     warning: 25
-#     ok: 25
-#     critical: 50
+---
+message: '@thomasb@aweber.com'
+query: '"datadog.agent.up".over("environment:production").by("service").last(1).pct_by_status()'
+type: service check
+name: Host Up
+options:
+  notify_audit: False
+  timeout_h: 0
+  silenced: {}
+  notify_no_data: True
+  renotify_interval: 0
+  no_data_timeframe: 2
+  thresholds:
+    warning: 25
+    ok: 25
+    critical: 50
