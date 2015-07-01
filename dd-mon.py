@@ -7,7 +7,7 @@ options = {
     'app_key': '62242ee5b9d7cfb79e20ae11fa6198d2db1f2d0a'
 }
 
-config_path = '/Users/thomasb/git/datadog_monitors/'
+config_path = './'
 
 initialize(**options)
 
