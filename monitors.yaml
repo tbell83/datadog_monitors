@@ -1,4 +1,4 @@
-message: '@thomasb@aweber.com'
+message: @pagerduty
 name: Mapping service running
 query: 'avg(last_1h):avg:aws.ec2.host_ok{service:mapping} < 1'
 type: metric alert
@@ -10,7 +10,7 @@ options:
   notify_no_data: True
   renotify_interval: 0
 ---
-message: '@thomasb@aweber.com'
+message: @pagerduty
 name: Tagging service running
 query: 'avg(last_1h):avg:aws.ec2.host_ok{service:tagging} < 1'
 type: metric alert
@@ -22,7 +22,7 @@ options:
   notify_no_data: True
   renotify_interval: 0
 ---
-message: '@thomasb@aweber.com'
+message: @pagerduty
 query: '"datadog.agent.up".over("environment:production").by("service").last(1).pct_by_status()'
 type: service check
 name: Host Up
@@ -37,3 +37,27 @@ options:
     warning: 25
     ok: 25
     critical: 50
+---
+message:  @pagerduty
+query:    'max(last_5m):avg:applications.mapping.timers.mapping.MappingHandler.GET.500.count{aws-production} > 5'
+type:     metric alert
+name:     Mapping 200
+options:
+	notify_audit :  False
+	timeout_h :  0
+	silenced :  {}
+	no_data_timeframe :  2
+	notify_no_data :  True
+	renotify_interval :  0
+---
+message:  @pagerduty
+query:    'max(last_5m):avg:applications.mapping.timers.mapping.MappingHandler.GET.200.95percentile{aws-production} > 20'
+type:     metric alert
+name:     Mapping 500
+options:
+	notify_audit :  False
+	timeout_h :  0
+	silenced :  {}
+	no_data_timeframe :  2
+	notify_no_data :  True
+	renotify_interval :  0
