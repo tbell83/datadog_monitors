@@ -41,7 +41,7 @@ options:
 message: '@pagerduty'
 query: 'max(last_5m):avg:applications.mapping.timers.mapping.MappingHandler.GET.500.count{aws-production} > 5'
 type: metric alert
-name: Mapping 200
+name: Mapping 500
 options:
   notify_audit :  False
   timeout_h :  0
@@ -53,7 +53,7 @@ options:
 message: '@pagerduty'
 query: 'max(last_5m):avg:applications.mapping.timers.mapping.MappingHandler.GET.200.95percentile{aws-production} > 20'
 type: metric alert
-name: Mapping 500
+name: Mapping 200
 options:
   notify_audit :  False
   timeout_h :  0
