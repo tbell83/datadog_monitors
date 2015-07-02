@@ -43,21 +43,21 @@ query: 'max(last_5m):avg:applications.mapping.timers.mapping.MappingHandler.GET.
 type: metric alert
 name: Mapping 500
 options:
-  notify_audit :  False
-  timeout_h :  0
-  silenced :  {}
-  no_data_timeframe :  2
-  notify_no_data :  True
-  renotify_interval :  0
+  notify_audit:  False
+  timeout_h:  0
+  silenced:  {}
+  no_data_timeframe:  2
+  notify_no_data:  False
+  renotify_interval:  0
 ---
 message: '@pagerduty'
 query: 'max(last_5m):avg:applications.mapping.timers.mapping.MappingHandler.GET.200.95percentile{environment:production} > 500'
 type: metric alert
 name: Mapping 200
 options:
-  notify_audit :  False
-  timeout_h :  0
-  silenced :  {}
-  no_data_timeframe :  2
-  notify_no_data :  True
-  renotify_interval :  0
+  notify_audit: False
+  timeout_h: 0
+  silenced: {}
+  no_data_timeframe: 2
+  notify_no_data: False
+  renotify_interval: 0
