@@ -51,7 +51,7 @@ options:
   renotify_interval :  0
 ---
 message: '@pagerduty'
-query: 'max(last_5m):avg:applications.mapping.timers.mapping.MappingHandler.GET.200.95percentile{aws-production} > 20'
+query: 'max(last_5m):avg:applications.mapping.timers.mapping.MappingHandler.GET.200.95percentile{aws-production} > 500'
 type: metric alert
 name: Mapping 200
 options:
