@@ -93,6 +93,10 @@ def compare_monitor(monitor1, monitor2):
        and (monitor1['type'] == monitor2['type'])
        and (monitor1['name'] == monitor2['name'])):
         mon_match = True
+        if ((monitor1['message'] and monitor2['message'])
+           and (monitor1['message'] != monitor2['message'])):
+            mon_match = False
+            return mon_match
 
     if (monitor1 == monitor2):
         mon_match = True
@@ -145,18 +149,17 @@ def get_removals(yaml_monitors, dd_monitors):
 def print_all_monitors(cfg_monitors, dd_monitors):
     print '\n'
     print 'Here\'s the YAML\n---------------\n'
-    for file in cfg_monitors:
-        for yaml_doc in read_yaml(file):
-            print yaml_doc
-            print 'message: ', yaml_doc['message'], type(yaml_doc['message'])
-            print 'query:   ', yaml_doc['query'], type(yaml_doc['query'])
-            print 'type:    ', yaml_doc['type'], type(yaml_doc['type'])
-            print 'name:    ', yaml_doc['name'], type(yaml_doc['name'])
-            print 'options: ', type(yaml_doc['options'])
-            for item in yaml_doc['options']:
-                print '\t', item, ': ', yaml_doc['options'][item], \
-                    type(yaml_doc['options'][item])
-            print '\n'
+    for monitor in cfg_monitors:
+        print monitor
+        print 'message: ', monitor['message'], type(monitor['message'])
+        print 'query:   ', monitor['query'], type(monitor['query'])
+        print 'type:    ', monitor['type'], type(monitor['type'])
+        print 'name:    ', monitor['name'], type(monitor['name'])
+        print 'options: ', type(monitor['options'])
+        for item in monitor['options']:
+            print '\t', item, ': ', monitor['options'][item], \
+                type(monitor['options'][item])
+        print '\n'
 
     print 'Here\'s the API output\n---------------\n'
     for monitor in dd_monitors:
@@ -180,7 +183,11 @@ for file in cfg_monitors:
     for yaml_doc in read_yaml(file):
         yaml_monitors.append(yaml_doc)
 
-# print_all_monitors(cfg_monitors, dd_monitors)
+# print_all_monitors(yaml_monitors, dd_monitors)
+# for dd_mon in dd_monitors:
+#     for yaml_mon in yaml_monitors:
+#         if compare_monitor(dd_mon, yaml_mon):
+#             print dd_mon, '\nmatches\n', yaml_mon, '\n\n'
 
 print "YAML Monitors:"
 for item in yaml_monitors:
