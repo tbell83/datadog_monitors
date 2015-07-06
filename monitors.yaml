@@ -1,4 +1,4 @@
-message: '@pagerduty'
+message: '@thomasb@aweber.com'
 name: Mapping service running
 query: 'avg(last_1h):avg:aws.ec2.host_ok{service:mapping} < 1'
 type: metric alert
@@ -10,7 +10,7 @@ options:
   notify_no_data: True
   renotify_interval: 0
 ---
-message: '@pagerduty'
+message: '@thomasb@aweber.com'
 name: Tagging service running
 query: 'avg(last_1h):avg:aws.ec2.host_ok{service:tagging} < 1'
 type: metric alert
