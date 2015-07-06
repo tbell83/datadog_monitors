@@ -1,10 +1,11 @@
 from datadog import initialize, api
 from os import walk
+from os import environ
 import yaml
 
 options = {
-    'api_key': 'd7ce8fdf7ff28617caf8f041c375ec58',
-    'app_key': '62242ee5b9d7cfb79e20ae11fa6198d2db1f2d0a'
+    'api_key': environ.get('API_KEY'),
+    'app_key': environ.get('APP_KEY')
 }
 
 config_path = './'
@@ -183,12 +184,6 @@ for file in cfg_monitors:
     for yaml_doc in read_yaml(file):
         yaml_monitors.append(yaml_doc)
 
-# print_all_monitors(yaml_monitors, dd_monitors)
-# for dd_mon in dd_monitors:
-#     for yaml_mon in yaml_monitors:
-#         if compare_monitor(dd_mon, yaml_mon):
-#             print dd_mon, '\nmatches\n', yaml_mon, '\n\n'
-
 print "YAML Monitors:"
 for item in yaml_monitors:
     print item['name']
@@ -196,7 +191,6 @@ for item in yaml_monitors:
 print "\nDatadog Monitors:"
 for item in dd_monitors:
     print item['name']
-
 
 additions = get_additions(yaml_monitors, dd_monitors)
 removals = get_removals(yaml_monitors, dd_monitors)
