@@ -197,26 +197,30 @@ print "\nDatadog Monitors:"
 for item in dd_monitors:
     print item['name']
 
-print "\nMonitors to be added:"
-for item in get_additions(yaml_monitors, dd_monitors):
-    print item['name']
-
-print "\nMonitors to be removed:"
-for item in get_removals(yaml_monitors, dd_monitors):
-    print item
 
 additions = get_additions(yaml_monitors, dd_monitors)
+removals = get_removals(yaml_monitors, dd_monitors)
+
+if len(additions) != 0:
+    print "\nMonitors to be added:"
+    for item in get_additions(yaml_monitors, dd_monitors):
+        print item['name']
+
+if len(removals) != 0:
+    print "\nMonitors to be removed:"
+    for item in get_removals(yaml_monitors, dd_monitors):
+        print item
+
 if len(additions) > 0:
     for item in additions:
         print "\nAdding ", item['name'], " to DataDog"
-        create_monitor(item)
+        # create_monitor(item)
 else:
-    print "Nothing to Add"
+    print "\nNothing to Add"
 
-removals = get_removals(yaml_monitors, dd_monitors)
 if len(removals) > 0:
     for item in get_removals(yaml_monitors, dd_monitors):
         print "\nRemoving", item, "from Datadog"
-        del_monitor(item)
+        # del_monitor(item)
 else:
-    print "Nothing to remove"
+    print "\nNothing to remove"
